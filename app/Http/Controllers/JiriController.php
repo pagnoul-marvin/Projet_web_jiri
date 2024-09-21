@@ -34,6 +34,7 @@ class JiriController extends Controller
         $jiri = Jiri::create($request->all());
 
         return redirect('/jiris/' . $jiri->id); //ou redirect()->route(jiri.show, $jiri->id)
+
     }
 
     /**
