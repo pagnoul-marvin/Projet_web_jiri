@@ -1,9 +1,9 @@
 <x-layouts.main>
 
-    <h1 class="font-bold text-2xl">Your contacts</h1>
+    <h1 class="font-bold text-2xl">{{__('Your contacts')}}</h1>
 
     <section>
-        <h2 class="font-bold">My contacts</h2>
+        <h2 class="font-bold">{{__('My contacts')}}</h2>
             <ul>
 
                 @foreach($contacts as $contact)

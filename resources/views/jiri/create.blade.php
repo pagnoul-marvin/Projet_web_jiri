@@ -6,7 +6,7 @@
 
         <div class="flex flex-col gap-2">
 
-            <label class="font-bold" for="name">Jiri's name
+            <label class="font-bold" for="name">{{__('Jiri\'s name')}}
 
                 @error('name')
 
@@ -22,7 +22,7 @@
 
         <div class="flex flex-col gap-2">
 
-            <label class="font-bold" for="starting_at">Jiri's starting at
+            <label class="font-bold" for="starting_at">{{__('Jiri\'s starting at')}}
 
                 @error('starting_at')
 

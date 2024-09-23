@@ -11,7 +11,7 @@
 
 <body class="pb-4 font-sans">
 <a class="sr-only"
-   href="#main-menu">Go to main menu</a>
+   href="#main-menu">{{__('Go to main menu')}}</a>
 <div class="flex flex-col-reverse gap-6">
     <main class="flex flex-col gap-4 px-4">
 

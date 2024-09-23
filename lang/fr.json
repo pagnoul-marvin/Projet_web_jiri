@@ -1,3 +1,25 @@
 {
-    "Create this jiri": "Créer un jiri"
+    "Create this jiri": "Créer un jiri",
+    "Your Jiris": "Vos jiris",
+    "Upcoming Jiris": "Jiris à venir",
+    "Past Jiris": "Jiris passés",
+    "Create a new Jiri": "Créer un nouveau Jiri",
+    "Jiris": "Jiris",
+    "Contacts": "Contacts",
+    "Projects": "Projets",
+    "Your contacts": "Vos contacts",
+    "My contacts": "Mes contacts",
+    "Your projects": "Vos projets",
+    "My projects": "Mes projets",
+    "Go to main menu": "Aller au menu principal",
+    "Jiri's starting at": "Début du Jiri",
+    "Jiri's name": "Nom du Jiri",
+    "Contact's name": "Nom du contact",
+    "Contact's email": "Email du contact",
+    "Starting at": "Début du Jiri",
+    "Project's info": "Info du projet",
+    "Project's description": "Description du projet",
+    "Project's website": "Site web du projet",
+    "Modify this Jiri": "Modifier ce Jiri",
+    "Delete this Jiri": "Supprimer ce Jiri"
 }

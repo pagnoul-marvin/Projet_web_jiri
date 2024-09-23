@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\JiriStoreRequest;
+use App\Http\Requests\JiriUpdateRequest;
 use App\Models\Jiri;
 use http\Env\Response;
 use Illuminate\Http\RedirectResponse;
@@ -49,24 +50,28 @@ class JiriController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Jiri $jiri)
     {
-        //
+        return view('jiri.edit', compact('jiri'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(JiriUpdateRequest $request, Jiri $jiri)
     {
-        //
+        $jiri->update($request->validated());
+
+        return to_route('jiri.show', $jiri);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Jiri $jiri)
     {
-        //
+        $jiri->delete();
+
+        return to_route('jiri.index');
     }
 }
