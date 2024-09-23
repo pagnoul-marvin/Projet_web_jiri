@@ -7,7 +7,6 @@
         <label for="name">Jiri's name</label>
         <input type="text" id="name" name="name">
 
-
         <label for="starting_at">Jiri's starting at</label>
         <input type="text" id="starting_at" name="starting_at">
 

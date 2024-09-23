@@ -9,7 +9,7 @@ Route::get('/', [JiriController::class, 'index'])->name('jiri.home');
 Route::get('/jiris', [JiriController::class, 'index'])->name('jiri.index');
 Route::get('/jiris/create', [JiriController::class, 'create'])->name('jiri.create');
 Route::post('/jiri', [JiriController::class, 'store'])->name('jiri.store')->middleware();
-Route::get('/jiris/{id}', [JiriController::class, 'show'])->name('jiri.show');
+Route::get('/jiris/{jiri}', [JiriController::class, 'show'])->name('jiri.show');
 
 Route::get('/contacts', [ContactController::class, 'index'])->name('contact.index');
 Route::get('/contacts/{id}', [ContactController::class, 'show'])->name('contact.show');
