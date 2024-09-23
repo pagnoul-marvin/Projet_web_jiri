@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ContactStoreRequest;
+use App\Http\Requests\ContactUpdateRequest;
 use App\Models\Contact;
 use Illuminate\Http\Request;
 
@@ -21,47 +23,52 @@ class ContactController extends Controller
      */
     public function create()
     {
-        //
+        return view('contact.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ContactStoreRequest $request)
     {
-        //
+        $contact = Contact::create($request->validated());
+
+        return to_route('contact.show', $contact);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Contact $contact)
     {
-        $contact = Contact::findOrFail($id);
         return view('contact.show', compact('contact'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Contact $contact)
     {
-        //
+        return view('contact.edit', compact('contact'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ContactUpdateRequest $request, Contact $contact)
     {
-        //
+        $contact->update($request->validated());
+
+        return to_route('contact.show', $contact);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Contact $contact)
     {
-        //
+        $contact->delete();
+
+        return to_route('contact.index');
     }
 }

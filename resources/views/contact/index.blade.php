@@ -15,4 +15,6 @@
             </ul>
     </section>
 
+    <a href="/contacts/create" class="text-blue-800 underline">{{__('Create a new Contact')}}</a>
+
 </x-layouts.main>

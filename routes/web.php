@@ -16,7 +16,13 @@ Route::get('/jiris/{jiri}/edit', [JiriController::class, 'edit'])->name('jiri.ed
 Route::get('/jiris/{jiri}', [JiriController::class, 'show'])->name('jiri.show');
 
 Route::get('/contacts', [ContactController::class, 'index'])->name('contact.index');
-Route::get('/contacts/{id}', [ContactController::class, 'show'])->name('contact.show');
+Route::get('/contacts/create', [ContactController::class, 'create'])->name('contact.create');
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+Route::patch('/contact/{contact}', [ContactController::class, 'update'])->name('contact.update');
+Route::delete('/contact/{contact}', [ContactController::class, 'destroy'])->name('contact.destroy');
+Route::get('/contacts/{contact}/edit', [ContactController::class, 'edit'])->name('contact.edit');
+Route::get('/contacts/{contact}', [ContactController::class, 'show'])->name('contact.show');
 
 Route::get('/projects', [ProjectController::class, 'index'])->name('project.index');
-Route::get('/projects/{id}', [ProjectController::class, 'show'])->name('project.show');
+Route::get('/projects/{project}', [ProjectController::class, 'show'])->name('project.show');
+Route::post('/project', [ProjectController::class, 'store'])->name('project.store');

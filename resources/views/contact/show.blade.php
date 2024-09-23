@@ -12,4 +12,16 @@
         </div>
     </dl>
 
+    <a class="text-blue-800 underline" href="/contacts/{{$contact->id}}/edit">{{__('Modify this Contact')}}</a>
+
+    <form action="{{route('contact.destroy', $contact)}}" method="POST">
+
+        @csrf
+        @method('DELETE')
+
+        <button type="submit"
+                class="bg-red-500 font-bold text-white rounded-md p-2 px-4 uppercase tracking-wider">{{__('Delete this Contact')}}</button>
+
+    </form>
+
 </x-layouts.main>

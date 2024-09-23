@@ -21,5 +21,9 @@
     "Project's description": "Description du projet",
     "Project's website": "Site web du projet",
     "Modify this Jiri": "Modifier ce Jiri",
-    "Delete this Jiri": "Supprimer ce Jiri"
+    "Delete this Jiri": "Supprimer ce Jiri",
+    "Create a new Contact": "Créer un nouveau contact",
+    "Delete this Contact": "Supprimer ce Contact",
+    "Create this Contact": "Créer ce Contact",
+    "Modify this Contact": "Modifier ce contact"
 }
