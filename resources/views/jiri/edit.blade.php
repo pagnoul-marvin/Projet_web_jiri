@@ -1,6 +1,6 @@
 <x-layouts.main>
 
-    <h1 class="font-bold text-2xl">Modifier <?= $jiri->name ?></h1>
+    <h1 class="font-bold text-2xl">{{'Modify'}} <?= $jiri->name ?></h1>
     <form action="{{route('jiri.update', $jiri)}}"
           method="POST"
           class="flex flex-col gap-6 bg-slate-50 rounded p-4">
@@ -21,7 +21,7 @@
             </label>
 
             <input required class="border border-grey-700 focus:invalid:border-pink-500 invalid:text-pink-600 rounded-md p-2"
-                   type="text" id="name" name="name" value="Actual name : {{$jiri->name}}">
+                   type="text" id="name" name="name" value="{{__('Actual name')}} : {{$jiri->name}}">
 
 
         </div>
@@ -38,7 +38,7 @@
             </label>
 
             <input required class="border border-grey-700 focus:invalid:border-pink-500 invalid:text-pink-600 rounded-md p-2"
-                   type="text" id="starting_at" name="starting_at" value="Actual starting at : {{$jiri->starting_at}}">
+                   type="text" id="starting_at" name="starting_at" value="{{__('Actual starting at')}} : {{$jiri->starting_at}}">
 
         </div>
 

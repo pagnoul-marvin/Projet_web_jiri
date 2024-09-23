@@ -22,8 +22,19 @@
     "Project's website": "Site web du projet",
     "Modify this Jiri": "Modifier ce Jiri",
     "Delete this Jiri": "Supprimer ce Jiri",
-    "Create a new Contact": "Créer un nouveau contact",
+    "Create a new Contact": "Créer un nouveau Contact",
     "Delete this Contact": "Supprimer ce Contact",
     "Create this Contact": "Créer ce Contact",
-    "Modify this Contact": "Modifier ce contact"
+    "Modify this Contact": "Modifier ce Contact",
+    "Create a new Project": "Créer un nouveau Projet",
+    "Create this Project": "Créer ce Projet",
+    "Project's name": "Nom du Projet",
+    "Modify this Project": "Modifier ce Projet",
+    "Delete this Project": "Supprimer ce Projet",
+    "Actual name": "Nom actuel",
+    "Actual email": "Email actuel",
+    "Actual description": "Description actuelle",
+    "Actual starting at": "Date de début actuelle",
+    "Actual url": "URL actuelle",
+    "Modify": "Modifier"
 }

@@ -20,4 +20,15 @@
         </div>
     </section>
 
+    <a href="/projects/{{$project->id}}/edit" class="underline text-blue-800">{{__('Modify this Project')}}</a>
+
+    <form action="{{route('project.destroy', $project)}}" method="POST">
+
+        @csrf
+        @method('DELETE')
+
+        <button class="bg-red-500 font-bold text-white rounded-md p-2 px-4 uppercase tracking-wider" type="submit">{{__('Delete this Project')}}</button>
+
+    </form>
+
 </x-layouts.main>

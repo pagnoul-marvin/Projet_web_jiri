@@ -1,6 +1,6 @@
 <x-layouts.main>
 
-    <h1 class="font-bold text-2xl">Modifier {{$contact->name}}</h1>
+    <h1 class="font-bold text-2xl">{{__('Modify')}} {{$contact->name}}</h1>
     <form action="{{route('contact.update', $contact)}}"
           method="POST"
           class="flex flex-col gap-6 bg-slate-50 rounded p-4">
@@ -21,7 +21,7 @@
             </label>
 
             <input required class="border border-grey-700 focus:invalid:border-pink-500 invalid:text-pink-600 rounded-md p-2"
-                   type="text" id="name" name="name" value="Actual name : {{$contact->name}}">
+                   type="text" id="name" name="name" value="{{__('Actual name')}} : {{$contact->name}}">
 
 
         </div>
@@ -38,7 +38,7 @@
             </label>
 
             <input required class="border border-grey-700 focus:invalid:border-pink-500 invalid:text-pink-600 rounded-md p-2"
-                   type="text" id="email" name="email" value="Actual email: {{$contact->email}}">
+                   type="text" id="email" name="email" value="{{__('Actual email')}} : {{$contact->email}}">
 
         </div>
 
