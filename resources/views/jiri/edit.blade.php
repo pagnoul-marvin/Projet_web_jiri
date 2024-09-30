@@ -42,8 +42,7 @@
 
         </div>
 
-        <button class="bg-blue-500 font-bold text-white rounded-md p-2 px-4 tracking-wider uppercase"
-                type="submit">{{__('Modify this Jiri')}}</button>
+        <x-forms.controls.button :text="__('Modify this Jiri')" color="bg-blue-600"/>
 
     </form>
 

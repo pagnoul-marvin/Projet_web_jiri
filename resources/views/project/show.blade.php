@@ -27,7 +27,7 @@
         @csrf
         @method('DELETE')
 
-        <button class="bg-red-500 font-bold text-white rounded-md p-2 px-4 uppercase tracking-wider" type="submit">{{__('Delete this Project')}}</button>
+        <x-forms.controls.button :text="__('Delete this Project')" color="bg-red-600"/>
 
     </form>
 

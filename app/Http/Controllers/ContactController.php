@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ContactStoreRequest;
 use App\Http\Requests\ContactUpdateRequest;
 use App\Models\Contact;
+use App\Models\User;
+use Auth;
 use Illuminate\Http\Request;
 
 class ContactController extends Controller
@@ -14,7 +16,7 @@ class ContactController extends Controller
      */
     public function index()
     {
-        $contacts = Contact::all();
+        $contacts = Auth::user()->contacts()->get();
         return view('contact.index', compact('contacts'));
     }
 

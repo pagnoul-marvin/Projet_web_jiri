@@ -5,9 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\JiriStoreRequest;
 use App\Http\Requests\JiriUpdateRequest;
 use App\Models\Jiri;
-use http\Env\Response;
+use App\Models\User;
+use Auth;
+use Gate;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 
 class JiriController extends Controller
 {
@@ -16,8 +17,8 @@ class JiriController extends Controller
      */
     public function index()
     {
-        $upcomingJiris = Jiri::where('starting_at', '>', now())->orderBy('starting_at')->get();
-        $pastJiris = Jiri::where('starting_at', '<=', now())->orderBy('starting_at', 'desc')->get();
+        $upcomingJiris = Auth::user()?->upcomingJiris()->where('starting_at', '>', now())->get();
+        $pastJiris = Auth::user()?->pastJiris()->where('starting_at', '<=', now())->get();
         return view('jiri.index', compact('upcomingJiris', 'pastJiris'));
     }
 
@@ -32,7 +33,7 @@ class JiriController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(JiriStoreRequest $request):RedirectResponse
+    public function store(JiriStoreRequest $request): RedirectResponse
     {
         $jiri = Jiri::create($request->validated());
 
@@ -44,6 +45,7 @@ class JiriController extends Controller
      */
     public function show(Jiri $jiri)
     {
+        //Gate::allowIf(fn(User $user) => $user->id === $jiri['user_id']);
         return view('jiri.show', compact('jiri'));
     }
 

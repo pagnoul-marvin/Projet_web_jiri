@@ -15,4 +15,6 @@
         </ul>
     </section>
 
+    <a class="underline text-blue-800" href="/projects/create">{{__('Create a new Project')}}</a>
+
 </x-layouts.main>

@@ -36,5 +36,11 @@
     "Actual description": "Description actuelle",
     "Actual starting at": "Date de début actuelle",
     "Actual url": "URL actuelle",
-    "Modify": "Modifier"
+    "Modify": "Modifier",
+    "Login": "Se connecter",
+    "Register": "Créer un compte",
+    "Profile": "Profil",
+    "Logout": "Se déconnecter",
+    "Dashboard": "Tableau de bord",
+    "You're logged in!": "Vous êtes connecté!"
 }

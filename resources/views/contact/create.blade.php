@@ -37,9 +37,7 @@
 
         </div>
 
-        <button class="bg-blue-500 font-bold text-white rounded-md p-2 px-4 tracking-wider uppercase" type="submit">
-            {{__('Create this Contact')}}
-        </button>
+        <x-forms.controls.button :text="__('Create this Contact')" color="bg-blue-600"/>
 
     </form>
 

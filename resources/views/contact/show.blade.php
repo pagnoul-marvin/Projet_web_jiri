@@ -19,9 +19,7 @@
         @csrf
         @method('DELETE')
 
-        <button type="submit"
-                class="bg-red-500 font-bold text-white rounded-md p-2 px-4 uppercase tracking-wider">{{__('Delete this Contact')}}</button>
-
+        <x-forms.controls.button :text="__('Delete this Contact')" color="bg-red-600"/>
     </form>
 
 </x-layouts.main>

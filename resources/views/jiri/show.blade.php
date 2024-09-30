@@ -26,9 +26,8 @@
           method="post">
         @csrf
         @method('DELETE')
-        <button type="submit"
-                class="bg-red-500 font-bold text-white rounded-md p-2 px-4 uppercase tracking-wider">{{__('Delete this Jiri')}}</button>
 
+        <x-forms.controls.button :text="__('Delete this Jiri')" color="bg-red-600"/>
     </form>
 
 </x-layouts.main>
