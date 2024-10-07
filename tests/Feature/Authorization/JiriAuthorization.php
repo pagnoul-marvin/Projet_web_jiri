@@ -2,7 +2,9 @@
 
 use App\Models\User;
 use function Pest\Laravel\actingAs;
+use function Pest\Laravel\delete;
 use function Pest\Laravel\get;
+use function Pest\Laravel\patch;
 
 beforeEach(function () {
     $this->user1 = User::factory()->hasJiris(1)->create();
@@ -39,4 +41,24 @@ test('a user can\'t edit a jiri that an other user owns' , function () {
     $response = get(route('jiri.edit', $other_jiri));
 
     $response->assertStatus(403);
+});
+
+test('a user can\'t update a jiri that an other user owns', function () {
+    actingAs($this->user1);
+
+    $other_jiri = $this->user2->jiris()->first();
+
+    $response = patch(route('jiri.update', $other_jiri));
+
+    $response->assertStatus(403);
+});
+
+test('a user can\'t delete a jiri that an other user owns' , function () {
+   actingAs($this->user1);
+
+   $other_jiri = $this->user2->jiris()->first();
+
+   $response = delete(route('jiri.destroy', $other_jiri));
+
+   $response->assertStatus(403);
 });

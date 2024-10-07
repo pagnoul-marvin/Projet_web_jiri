@@ -7,6 +7,10 @@ use App\Http\Requests\ContactUpdateRequest;
 use App\Models\Contact;
 use App\Models\User;
 use Auth;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Application;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class ContactController extends Controller
@@ -14,7 +18,7 @@ class ContactController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): View|Factory|Application
     {
         $contacts = Auth::user()->contacts()->get();
         return view('contact.index', compact('contacts'));
@@ -23,7 +27,7 @@ class ContactController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): View|Factory|Application
     {
         return view('contact.create');
     }
@@ -31,7 +35,7 @@ class ContactController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(ContactStoreRequest $request)
+    public function store(ContactStoreRequest $request): RedirectResponse
     {
         $contact = Contact::create($request->validated());
 
@@ -41,7 +45,7 @@ class ContactController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Contact $contact)
+    public function show(Contact $contact): View|Factory|Application
     {
         return view('contact.show', compact('contact'));
     }
@@ -49,7 +53,7 @@ class ContactController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Contact $contact)
+    public function edit(Contact $contact): View|Factory|Application
     {
         return view('contact.edit', compact('contact'));
     }
@@ -57,7 +61,7 @@ class ContactController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(ContactUpdateRequest $request, Contact $contact)
+    public function update(ContactUpdateRequest $request, Contact $contact): RedirectResponse
     {
         $contact->update($request->validated());
 
@@ -67,7 +71,7 @@ class ContactController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Contact $contact)
+    public function destroy(Contact $contact): RedirectResponse
     {
         $contact->delete();
 

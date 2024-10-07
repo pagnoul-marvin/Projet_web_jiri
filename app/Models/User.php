@@ -71,4 +71,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Project::class)->orderBy('name');
     }
+
+    public function attendances(): HasMany
+    {
+        return $this->hasMany(Attendance::class, 'contact_id');
+    }
 }

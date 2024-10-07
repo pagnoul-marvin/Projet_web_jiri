@@ -42,5 +42,9 @@
     "Profile": "Profil",
     "Logout": "Se déconnecter",
     "Dashboard": "Tableau de bord",
-    "You're logged in!": "Vous êtes connecté!"
+    "You're logged in!": "Vous êtes connecté!",
+    "Change to evaluator": "Changer en évaluateur",
+    "Change to student": "Changer en étudiant",
+    "Evaluators": "Evaluateurs",
+    "Students": "Étudiants"
 }

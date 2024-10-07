@@ -13,6 +13,6 @@ class ContactSeeder extends Seeder
      */
     public function run(): void
     {
-        Contact::factory(10)->create();
+        Contact::factory(5)->create();
     }
 }
