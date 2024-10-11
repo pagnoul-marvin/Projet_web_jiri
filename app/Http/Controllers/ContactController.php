@@ -37,7 +37,7 @@ class ContactController extends Controller
      */
     public function store(ContactStoreRequest $request): RedirectResponse
     {
-        $contact = Contact::create($request->validated());
+        $contact = Auth::user()->contacts()->create($request->validated());
 
         return to_route('contact.show', $contact);
     }

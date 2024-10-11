@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\JiriStoreRequest;
 use App\Http\Requests\JiriUpdateRequest;
+use App\Models\Attendance;
 use App\Models\Jiri;
 use App\Models\User;
 use Auth;
@@ -24,14 +25,22 @@ class JiriController extends Controller
 
     public function create(): View|Factory|Application
     {
-        return view('jiri.create');
+        $contacts = Auth::user()->contacts()->get();
+        return view('jiri.create', compact('contacts'));
     }
 
     public function store(JiriStoreRequest $request): RedirectResponse
     {
-        $jiri = Jiri::create($request->validated());
+        $jiri_id = Auth::user()->jiris()->create($request->validated());
 
-        return to_route('jiri.show', $jiri);
+        if ($jiri_id) {
+            foreach ($request->input('contacts') as $contact_id) {
+                $role = $request->input('role-' . $contact_id);
+                $jiri_id->contacts()->attach($contact_id, ['role' => $role]);
+            }
+        }
+
+        return to_route('jiri.show', $jiri_id);
     }
 
     public function show(Jiri $jiri): View|Factory|Application
@@ -51,6 +60,7 @@ class JiriController extends Controller
 
         return to_route('jiri.show', $jiri);
     }
+
     public function destroy(Jiri $jiri): RedirectResponse
     {
         $jiri->delete();

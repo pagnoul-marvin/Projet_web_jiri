@@ -24,11 +24,11 @@
 
         <h2 class="font-bold">{{__('Evaluators')}} :</h2>
 
-        <ul class="flex gap-5 flex-col">
+        <ul class="flex gap-5 flex-col mb-5">
 
             @foreach($jiri->evaluators as $evaluator)
 
-                <li class="flex gap-2">
+                <li class="flex gap-2 items-center">
                     <p>{{$evaluator->name}}</p>
                     <form action="{{route('attendance.update', $evaluator->pivot->id)}}" method="POST">
                         @csrf
@@ -46,13 +46,13 @@
 
     <div>
 
-        <h2 class="font-bold">{{__('Students')}} :</h2>
+        <h2 class="font-bold mb-5">{{__('Students')}} :</h2>
 
         <ul class="flex gap-5 flex-col">
 
             @foreach($jiri->students as $student)
 
-                <li class="flex gap-2">
+                <li class="flex gap-2 items-center">
                     <p>{{$student->name}}</p>
                     <form action="{{route('attendance.update', $student->pivot->id)}}" method="POST">
                         @csrf

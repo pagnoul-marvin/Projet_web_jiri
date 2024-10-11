@@ -37,6 +37,36 @@
 
         </div>
 
+        <div>
+
+            <h2 class="font-black mb-5">{{__('List of contacts that you can add to your new Jiri')}}</h2>
+
+            <ul class="flex-col flex gap-5">
+
+                @foreach($contacts as $contact)
+
+                    <li class="flex flex-row gap-3 items-center">
+
+                        <input id="c-{{$contact->id}}" type="checkbox" name="contacts[]" class="h-4 w-4" value="{{$contact->id}}">
+                        <label for="c-{{$contact->id}}">{{$contact->name}}</label>
+
+                        <select name="role-{{$contact->id}}" id="role-{{$contact->id}}" class="rounded">
+
+                            <option value="{{\App\Enums\ContactRoles::Student->value}}">{{__('Students')}}</option>
+                            <option value="{{\App\Enums\ContactRoles::Evaluator->value}}">{{__('Evaluators')}}</option>
+
+                        </select>
+
+                        <label for="role-{{$contact->id}}" class="font-bold sr-only">{{__('Role')}}</label>
+
+                    </li>
+
+                @endforeach
+
+            </ul>
+
+        </div>
+
         <x-forms.controls.button :text="__('Create this jiri')" color="bg-blue-600"/>
 
     </form>
