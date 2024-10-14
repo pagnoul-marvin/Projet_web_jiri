@@ -2,7 +2,10 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\ContactRoles;
+use Auth;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class JiriStoreRequest extends FormRequest
 {
@@ -21,9 +24,22 @@ class JiriStoreRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        $roles = implode(',', [ContactRoles::Evaluator->value, ContactRoles::Student->value]);
+
+        $rules = [
             'name' => 'required|between:3,255',
             'starting_at' =>  'required|date_format:Y-m-d H:i',
+            'contacts' => Rule::exists('contacts', 'id')->where('user_id', Auth::user()->id),
+            'projects' => Rule::exists('projects', 'id')->where('user_id', Auth::user()->id),
         ];
+
+        $request_data = $this->all();
+        foreach ($request_data as $key => $value) {
+             if(preg_match('/^role-\d+$/', $key)){
+                 $rules[$key] = "in:$roles";
+             }
+        }
+
+        return $rules;
     }
 }

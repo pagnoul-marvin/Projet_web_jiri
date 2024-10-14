@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\JiriStoreRequest;
 use App\Http\Requests\JiriUpdateRequest;
+use App\Models\Assignement;
 use App\Models\Attendance;
 use App\Models\Jiri;
-use App\Models\User;
+use App\Models\Project;
 use Auth;
-use Gate;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
@@ -26,27 +26,37 @@ class JiriController extends Controller
     public function create(): View|Factory|Application
     {
         $contacts = Auth::user()->contacts()->get();
-        return view('jiri.create', compact('contacts'));
+        $projects = Auth::user()->projects()->get();
+        return view('jiri.create', compact('contacts', 'projects'));
     }
 
     public function store(JiriStoreRequest $request): RedirectResponse
     {
-        $jiri_id = Auth::user()->jiris()->create($request->validated());
+        $jiri = Auth::user()->jiris()->create($request->validated());
 
-        if ($jiri_id) {
+        if ($jiri) {
             foreach ($request->input('contacts') as $contact_id) {
                 $role = $request->input('role-' . $contact_id);
-                $jiri_id->contacts()->attach($contact_id, ['role' => $role]);
+                $jiri->contacts()->attach($contact_id, ['role' => $role]);
+            }
+
+            foreach ($request->input('projects') as $project_id) {
+                $jiri->projects()->attach($project_id);
             }
         }
 
-        return to_route('jiri.show', $jiri_id);
+        return to_route('jiri.show', $jiri);
     }
 
     public function show(Jiri $jiri): View|Factory|Application
     {
-        $jiri->load(['students', 'evaluators']);
-        return view('jiri.show', compact('jiri'));
+        $jiri->load(['students', 'evaluators', 'projects']);
+
+        $associated_projects_id = $jiri->projects->pluck('id')->toArray(); //on récupère les id des projets liés au Jiri
+
+        $remaining_projects = Project::where('user_id', Auth::id())->whereNotIn('id', $associated_projects_id)->get();
+
+        return view('jiri.show', compact('jiri', 'remaining_projects'));
     }
 
     public function edit(Jiri $jiri): View|Factory|Application

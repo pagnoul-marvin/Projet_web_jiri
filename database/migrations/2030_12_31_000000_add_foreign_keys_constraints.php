@@ -12,20 +12,25 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('jiris', function (Blueprint $table) {
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
 
         Schema::table('contacts', function (Blueprint $table) {
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
 
         Schema::table('projects', function (Blueprint $table) {
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
 
         Schema::table('attendances', function (Blueprint $table) {
-            $table->foreign('jiri_id')->references('id')->on('jiris');
-            $table->foreign('contact_id')->references('id')->on('contacts');
+            $table->foreign('jiri_id')->references('id')->on('jiris')->onDelete('cascade');
+            $table->foreign('contact_id')->references('id')->on('contacts')->onDelete('cascade');
+        });
+
+        Schema::table('assignements', function (Blueprint $table) {
+            $table->foreign('jiri_id')->references('id')->on('jiris')->onDelete('cascade');
+            $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
         });
     }
 
@@ -49,6 +54,11 @@ return new class extends Migration
         Schema::table('attendances', function (Blueprint $table) {
            $table->dropForeign('jiri_id');
            $table->dropForeign('contact_id');
+        });
+
+        Schema::table('assignements', function (Blueprint $table) {
+           $table->dropForeign('jiri_id');
+           $table->dropForeign('project_id');
         });
     }
 };

@@ -6,10 +6,18 @@
             <dt class="font-bold">{{__('Contact\'s name')}}</dt>
             <dd>{{$contact->name}}</dd>
         </div>
+
         <div>
             <dt class="font-bold">{{__('Contact\'s email')}}</dt>
             <dd>{{$contact->email}}</dd>
         </div>
+
+        @if($contact->photo)
+            <div>
+                <dt class="font-bold">{{__('Contact\'s photo')}}</dt>
+                <dd><img src="{{asset($contact->photo)}}" alt="exemple"></dd>
+            </div>
+        @endif
     </dl>
 
     <a class="text-blue-800 underline" href="/contacts/{{$contact->id}}/edit">{{__('Modify this Contact')}}</a>

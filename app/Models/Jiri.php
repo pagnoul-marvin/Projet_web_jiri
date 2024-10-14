@@ -46,9 +46,19 @@ class Jiri extends Model
         return $this->contacts()->withPivotValue('role', ContactRoles::Evaluator->value)->withPivot('id');
     }
 
+    public function projects(): BelongsToMany
+    {
+        return $this->belongsToMany(Project::class, Assignement::class)->withPivot('id');
+    }
+
     public function attendances(): HasMany
     {
         return $this->HasMany(Contact::class,Attendance::class);
+    }
+
+    public function assignements(): HasMany
+    {
+        return $this->HasMany(Project::class,Assignement::class);
     }
 
     public function addStudent(Contact $contact): void

@@ -2,12 +2,12 @@
 
 namespace App\Policies;
 
-use App\Models\Attendance;
-use App\Models\Contact;
+use App\Models\Assignement;
 use App\Models\Jiri;
+use App\Models\Project;
 use App\Models\User;
 
-class AttendancePolicy
+class AssignementPolicy
 {
     /**
      * Determine whether the user can view any models.
@@ -20,7 +20,7 @@ class AttendancePolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Attendance $attendance): bool
+    public function view(User $user, Assignement $assignement): bool
     {
         //
     }
@@ -36,27 +36,26 @@ class AttendancePolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Attendance $attendance): bool
-    {
-        $jiri = Jiri::find($attendance->jiri_id);
-
-        $contact = Contact::find($attendance->contact_id);
-
-        return $user->id === $jiri->user_id && $user->id === $contact->user_id;
-    }
-
-    /**
-     * Determine whether the user can delete the model.
-     */
-    public function delete(User $user, Attendance $attendance): bool
+    public function update(User $user, Assignement $assignement): bool
     {
         //
     }
 
     /**
+     * Determine whether the user can delete the model.
+     */
+    public function delete(User $user, Assignement $assignement): bool
+    {
+        $jiri = Jiri::find($assignement->jiri_id);
+        $project = Project::find($assignement->project_id);
+
+        return $user->id === $jiri->user_id && $user->id === $project->user_id;
+    }
+
+    /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Attendance $attendance): bool
+    public function restore(User $user, Assignement $assignement): bool
     {
         //
     }
@@ -64,7 +63,7 @@ class AttendancePolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Attendance $attendance): bool
+    public function forceDelete(User $user, Assignement $assignement): bool
     {
         //
     }

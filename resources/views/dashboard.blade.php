@@ -12,6 +12,13 @@
                     {{ __("You're logged in!") }}
                 </div>
             </div>
+
+            <div class="mt-10">
+
+                <a href="{{route('jiri.index')}}"
+                   class="font-bold text-white rounded-md p-2 px-4 tracking-wider uppercase bg-blue-600">{{'Go to your Jiris'}}</a>
+
+            </div>
         </div>
     </div>
 </x-app-layout>

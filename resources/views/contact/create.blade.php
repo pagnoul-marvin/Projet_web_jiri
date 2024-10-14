@@ -1,6 +1,6 @@
 <x-layouts.main>
 
-    <form action="/contact" method="post" class="flex flex-col gap-8">
+    <form action="/contact" method="post" enctype="multipart/form-data" class="flex flex-col gap-8">
 
         @csrf
 
@@ -15,6 +15,7 @@
                 @enderror
 
             </label>
+
             <input class="border border-grey-700 focus:invalid:border-pink-500 invalid:text-pink-600 rounded-md p-2"
                    required type="text" id="name" name="name" value="{{old('name')}}" placeholder="Jean">
 
@@ -31,9 +32,18 @@
                 @enderror
 
             </label>
+
             <input class="border border-grey-700 focus:invalid:border-pink-500 invalid:text-pink-600 rounded-md p-2"
                    required type="text" id="email" name="email" value="{{old('email')}}"
                    placeholder="jean@gmail.com">
+
+        </div>
+
+        <div class="flex flex-col gap-2">
+
+            <label class="font-bold" for="photo">{{__('Contact\'s photo')}}</label>
+
+            <input class="border border-grey-700 rounded-md p-2" type="file" id="photo" name="photo">
 
         </div>
 

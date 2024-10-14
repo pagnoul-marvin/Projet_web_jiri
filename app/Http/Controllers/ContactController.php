@@ -7,11 +7,13 @@ use App\Http\Requests\ContactUpdateRequest;
 use App\Models\Contact;
 use App\Models\User;
 use Auth;
+use Config;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Intervention\Image\Image;
 
 class ContactController extends Controller
 {
@@ -37,7 +39,21 @@ class ContactController extends Controller
      */
     public function store(ContactStoreRequest $request): RedirectResponse
     {
-        $contact = Auth::user()->contacts()->create($request->validated());
+        $validated = $request->validated();
+        if ($request->hasFile('photo')) {
+            $validated['photo'] = $request->file('photo')->store('contacts/' . Auth::user()->id . '/original');
+
+            $sizes = Config::get('photos.sizes');
+            foreach ($sizes as $size => $value) {
+                if (!is_int($value)) {
+                    continue;
+                }
+
+                //Image::class->cover($validated['photo'], $size, $value);
+            }
+        }
+
+        $contact = Auth::user()->contacts()->create($validated);
 
         return to_route('contact.show', $contact);
     }

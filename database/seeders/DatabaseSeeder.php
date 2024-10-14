@@ -27,7 +27,11 @@ class DatabaseSeeder extends Seeder
         foreach ($users as $user) {
             $user->jiris->each(function ($jiri) use ($user) {
                 $user->contacts->random(5)->each(function ($contact) use ($jiri) {
-                    $jiri->contacts()->attach($contact,['role' => random_int(0, 1) ?ContactRoles::Evaluator->value:ContactRoles::Student->value]);
+                    $jiri->contacts()->attach($contact, ['role' => random_int(0, 1) ? ContactRoles::Evaluator->value : ContactRoles::Student->value]);
+                });
+
+                $user->projects->random(2)->each(function ($project) use ($jiri) {
+                    $jiri->projects()->attach($project);
                 });
             });
         }
@@ -44,9 +48,12 @@ class DatabaseSeeder extends Seeder
 
         $marvin->jiris->each(function ($jiri) use ($marvin) {
             $marvin->contacts->random(5)->each(function ($contact) use ($jiri) {
-                $jiri->contacts()->attach($contact,['role' => random_int(0, 1) ?ContactRoles::Evaluator->value:ContactRoles::Student->value]);
+                $jiri->contacts()->attach($contact, ['role' => random_int(0, 1) ? ContactRoles::Evaluator->value : ContactRoles::Student->value]);
+            });
+
+            $marvin->projects->random(2)->each(function ($project) use ($jiri) {
+                $jiri->projects()->attach($project);
             });
         });
-
     }
 }
