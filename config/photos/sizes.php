@@ -2,7 +2,7 @@
 
 return [
     'original' => null,
-    'small' => 400,
-    'medium' => 700,
-    'large' => 1000,
+    'small' => ['width' => 300, 'height' => 300],
+    'medium' => 500,
+    'large' => 720,
 ];

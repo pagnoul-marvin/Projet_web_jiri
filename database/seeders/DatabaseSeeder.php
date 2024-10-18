@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Enums\ContactRoles;
-use App\Models\Attendance;
 use App\Models\Contact;
 use App\Models\Jiri;
 use App\Models\Project;
@@ -26,13 +25,8 @@ class DatabaseSeeder extends Seeder
             ->create();
         foreach ($users as $user) {
             $user->jiris->each(function ($jiri) use ($user) {
-                $user->contacts->random(5)->each(function ($contact) use ($jiri) {
-                    $jiri->contacts()->attach($contact, ['role' => random_int(0, 1) ? ContactRoles::Evaluator->value : ContactRoles::Student->value]);
-                });
-
-                $user->projects->random(2)->each(function ($project) use ($jiri) {
-                    $jiri->projects()->attach($project);
-                });
+                $this->createAttendances($user, $jiri);
+                $this->createAssignements($user, $jiri);
             });
         }
 
@@ -47,13 +41,23 @@ class DatabaseSeeder extends Seeder
             ]);
 
         $marvin->jiris->each(function ($jiri) use ($marvin) {
-            $marvin->contacts->random(5)->each(function ($contact) use ($jiri) {
-                $jiri->contacts()->attach($contact, ['role' => random_int(0, 1) ? ContactRoles::Evaluator->value : ContactRoles::Student->value]);
-            });
+            $this->createAttendances($marvin, $jiri);
+            $this->createAssignements($marvin, $jiri);
+        });
+    }
 
-            $marvin->projects->random(2)->each(function ($project) use ($jiri) {
-                $jiri->projects()->attach($project);
-            });
+    private function createAttendances($user, $model): void
+    {
+        $user->contacts->random(5)->each(function ($contact) use ($model) {
+            $role = random_int(0, 1) ? ContactRoles::Evaluator->value : ContactRoles::Student->value;
+            $model->contacts()->attach($contact, ['role' => $role, 'token' => $role == ContactRoles::Evaluator->value ? bin2hex(random_bytes(50)) : null]);
+        });
+    }
+
+    private function createAssignements($user, $model): void
+    {
+        $user->projects->random(2)->each(function ($project) use ($model) {
+            $model->projects()->attach($project);
         });
     }
 }

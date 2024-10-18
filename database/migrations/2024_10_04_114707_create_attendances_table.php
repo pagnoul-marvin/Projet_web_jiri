@@ -16,6 +16,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('jiri_id');
             $table->unsignedBigInteger('contact_id');
+            $table->string('token')->nullable();
             $table->enum('role', [ContactRoles::Student->value, ContactRoles::Evaluator->value]);
             $table->timestamps();
         });

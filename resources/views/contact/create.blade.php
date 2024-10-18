@@ -41,7 +41,15 @@
 
         <div class="flex flex-col gap-2">
 
-            <label class="font-bold" for="photo">{{__('Contact\'s photo')}}</label>
+            <label class="font-bold" for="photo">{{__('Contact\'s photo')}}
+
+                @error('photo')
+
+                <span class="block text-red-500">{{$message}}</span>
+
+                @enderror
+
+            </label>
 
             <input class="border border-grey-700 rounded-md p-2" type="file" id="photo" name="photo">
 

@@ -2,18 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ContactPhotoStored;
 use App\Http\Requests\ContactStoreRequest;
 use App\Http\Requests\ContactUpdateRequest;
 use App\Models\Contact;
-use App\Models\User;
 use Auth;
-use Config;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Intervention\Image\Image;
+use Illuminate\Support\Facades\Storage;
 
 class ContactController extends Controller
 {
@@ -41,16 +39,9 @@ class ContactController extends Controller
     {
         $validated = $request->validated();
         if ($request->hasFile('photo')) {
-            $validated['photo'] = $request->file('photo')->store('contacts/' . Auth::user()->id . '/original');
+            $validated['photo'] = Storage::putFile('contacts/' . Auth::id() . '/original', $request->file('photo'));
 
-            $sizes = Config::get('photos.sizes');
-            foreach ($sizes as $size => $value) {
-                if (!is_int($value)) {
-                    continue;
-                }
-
-                //Image::class->cover($validated['photo'], $size, $value);
-            }
+           ContactPhotoStored::dispatch($validated);
         }
 
         $contact = Auth::user()->contacts()->create($validated);
